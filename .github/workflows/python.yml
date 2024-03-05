@@ -1,3 +1,5 @@
+name: Run Python script
+
 on:
   repository_dispatch:
     types: [trigger-workflow]
@@ -8,27 +10,12 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v2
         with:
-          python-version: '3.10'
+          python-version: '3.9'
 
       - name: Run Python script
-        run: |
-          python test.py > output.txt
-          continue-on-error: true  # Add this line to prevent job failure if python test.py returns a non-zero exit code
-
-      - name: Save output
-        if: success()
-        run: |
-          mv output.txt $GITHUB_WORKSPACE/output.txt
-
-      - name: Upload Artifact
-        if: success()
-        uses: actions/upload-artifact@v4
-        with:
-          name: output-artifact
-          path: $GITHUB_WORKSPACE/output.txt
-
+        run: python test.py
