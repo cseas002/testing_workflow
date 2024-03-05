@@ -18,7 +18,6 @@ jobs:
       - name: Run Python script
         run: |
           python test.py > output.txt
-          continue-on-error: true  # Add this line to prevent job failure if python test.py returns a non-zero exit code
 
       - name: Save output
         if: success()
